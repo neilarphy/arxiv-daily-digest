@@ -67,15 +67,42 @@ flowchart LR
 
 ## Стек (планируемый)
 
-Python, arXiv API, модель эмбеддингов для текста, PostgreSQL или SQLite, aiogram для Telegram-бота, LLM через API, Docker, один недорогой сервер.
+Python 3.13, arXiv API, модель эмбеддингов для текста, PostgreSQL, aiogram для Telegram-бота, LLM через API [BotHub](https://bothub.chat/), Docker, собственный сервер.
+
+Инструменты разработки: [uv](https://docs.astral.sh/uv/) для окружения и зависимостей, [ruff](https://docs.astral.sh/ruff/) как линтер и форматер, [pre-commit](https://pre-commit.com/) для проверок перед коммитом.
 
 ## Структура репозитория
 
 ```
-docs/        дизайн-документ
-src/         код (появится на этапе MVP)
-notebooks/   эксперименты и офлайн-оценка
+docs/                     дизайн-документ
+src/                      код (появится на этапе MVP)
+notebooks/                эксперименты и офлайн-оценка
+pyproject.toml            метаданные проекта, зависимости, настройки ruff
+uv.lock                   зафиксированные версии зависимостей
+.pre-commit-config.yaml   хуки pre-commit
 ```
+
+## Разработка
+
+Нужен установленный [uv](https://docs.astral.sh/uv/getting-started/installation/).
+
+```bash
+git clone https://github.com/neilarphy/arxiv-daily-digest.git
+cd arxiv-daily-digest
+
+uv sync
+uv tool install pre-commit
+pre-commit install
+```
+
+Проверки запускаются автоматически при `git commit`. Вручную:
+
+```bash
+pre-commit run --all-files
+uv run ruff check . --fix
+uv run ruff format .
+```
+
 
 ## Альтернативы
 
