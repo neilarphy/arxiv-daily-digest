@@ -1,0 +1,54 @@
+{
+  "annotator": "silver",
+  "note": "Синтетический профиль для «серебряной» разметки Claude: не интересы автора. Критерий релевантности зафиксирован до разметки: основной вклад статьи – рекомендательные системы, персонализация и моделирование пользователя, поиск и ранжирование (IR) или методы и оценка retrieval-augmented generation. Прикладная работа, где RAG или ранжирование – второстепенный инструмент, – нерелевантна; пограничные случаи – «не уверен».",
+  "favorites": [
+    "2610.02968",
+    "2610.14394",
+    "2610.07588",
+    "2609.39007",
+    "2610.09493"
+  ],
+  "keywords": [
+    "recommend",
+    "retrieval-augmented",
+    "retrieval",
+    "ranking",
+    "collaborative filtering",
+    "personalization",
+    "user preference",
+    "cold-start"
+  ],
+  "description": "Recommender systems and personalization: sequential and LLM-based recommendation, ranking, information retrieval and retrieval-augmented generation, evaluation of recommendation quality, cold start.",
+  "favorite_papers": [
+    {
+      "id": "2610.02968",
+      "title": "Reasoning with Evidence, Not Merely Rationales: Verifiable Preference Proofs for LLM-Based Recommendation",
+      "abstract": "Large language models (LLMs) can infer user preferences from interaction histories and reviews, yet the rationales they generate may not reflect the information actually used for recommendation. A preference claim may be weakly supported by its selected evidence, or may have little effect on the final ranking. We refer to these two failures as the grounding-influence gap. We introduce PROVE-REC, a general framework for verifiable preference reasoning in LLM-based recommendation. Pass A converts the complete pre-target history into a compact preference proof consisting of positive and avoidance claims linked to selected evidence entries. Pass B predicts the next item using only the proof and its selected evidence, preventing the recommender from bypassing the reasoning path. To verify evidence-to-proof grounding, we compare the effect of masking selected evidence with masking a comparable control entry. To verify proof-to-recommendation influence, we remove a preference claim and measure the resulting decrease in the target item's ranking margin. A ranking-preservation objective further retains useful information from the complete history. Comprehensive experiments on wide-ranging real-world datasets demonstrate that PROVE-REC consistently outperforms strong sequential, generative, and LLM-enhanced baselines, with improvements of up to 7.45%. Controlled ablations confirm the effectiveness of the two-pass architecture and verification objectives. Moreover, PROVE-REC produces claims that are more strongly grounded in historical evidence and more influential to recommendation while preserving ranking quality.",
+      "primary_category": "cs.AI"
+    },
+    {
+      "id": "2610.14394",
+      "title": "Understanding and Mitigating Training Instability in Large-Scale Recommender Systems: A Cascade Perspective",
+      "abstract": "Training large-scale recommender systems on dynamic industrial platforms, such as Short-Form Video (SFV) services with billions of daily interactions, faces critical stability challenges. Rapid distribution shifts in user data and increasing model complexity frequently trigger a divergence cascade, typically initiating with gradient explosion, propagating to weight explosion, and culminating in loss explosion. This G-W-L cascade severely impedes model convergence and performance. This paper provides a systematic analysis of this G-W-L cascade within an industrial SFV recommender context. We then propose and evaluate a structured mitigation framework where interventions are explicitly mapped to counteract specific stages of the cascade: gradient (G) control, weight/activation (W) stabilization, and loss (L) shaping. Our contribution provides a structured framework for understanding and tackling training divergence, offering practical insights for deploying robust, continuously updated recommenders in large-scale, non-stationary settings. We empirically validate the effectiveness of these strategies on a major industrial SFV recommendation system.",
+      "primary_category": "cs.IR"
+    },
+    {
+      "id": "2609.39007",
+      "title": "RouteRec: Behavior-Guided Sparse Routing for Sequential Recommendation",
+      "abstract": "Sessionized interaction histories contain behavioral patterns that can improve sequential recommendation. However, existing models process all sessions through the same parameterized blocks, regardless of their behavioral differences. Mixture of Experts (MoE) enables conditional computation, but it leaves open what should guide expert allocation. We propose RouteRec, a sequential recommender that uses observed session behavior as the routing criterion. RouteRec summarizes four types of behavioral evidence from sessionized histories: interaction tempo, item-group focus, repetition and carryover, and popularity tendency. It uses these cues to route computation at macro, mid, and micro scopes. Cue-derived scores first select expert groups; within each selected group, the current backbone state then refines expert selection. Across six public datasets and 18 dataset-metric combinations, RouteRec ranks first in 12 and second in three, yielding the best overall average rank of 1.61 compared with 4.11 for the next-best baseline. Additional analyses suggest that the behavioral cues guide expert allocation beyond added capacity and produce routing patterns aligned with observed behavior. Our code is available at https://github.com/jy1559/RouteRec",
+      "primary_category": "cs.IR"
+    },
+    {
+      "id": "2610.09493",
+      "title": "The Attribution Blind Spot: Layerwise Trajectory Diagnostics for Source Reliance in Retrieval-Augmented Language Models",
+      "abstract": "A retrieval-augmented model can match a document without relying on it. Controlled knowledge conflicts make source choice observable and let us ask a second question that prediction alone cannot answer: which internal-state properties define useful intervention directions? We study paired hidden-state changes with Latent Trajectory Shift (LTS), a signed projection onto a training-fitted first principal component (PC1), and keep verified training exposure separate from behavioral source choice. Across the evaluated conflicts, state-change magnitude is often the stronger predictor, whereas signed PC1 is the stronger selective controller: equal-norm interventions change source preference while better preserving non-target behavior, and the frozen direction transfers across the tested datasets and aligned model pairs. A same-system OLMo study further combines positive choice and control results with inconclusive exposure detection at the achieved power. The central result is a separation: representations that diagnose what a model will choose need not be the representations that best control that choice.",
+      "primary_category": "cs.AI"
+    },
+    {
+      "id": "2610.07588",
+      "title": "Personal-Agent Mediated Recommendation with Cross-Platform User History",
+      "abstract": "Modern recommendation is shifting from platform-centric personalization toward user-governed personalization, where a personal LLM agent can act on the user's behalf across services. We formalize this emerging paradigm as Personal-Agent Mediated Recommendation: a platform recommender ranks a candidate set using platform-local information, and a personal agent uses user-authorized cross-platform history to mediate the resulting ranking and produce the final top-K slate. Such mediation is nontrivial: the platform ranking can encode strong population evidence that the personal agent cannot observe, so effective mediation must therefore balance beneficial rescues against harmful overrides. To study this trade-off, we introduce MediateRec, a benchmark that includes scalable proxy cross-platform environments and a real cross-platform test under a controlled platform-agent information boundary. To train the agent to use cross-platform history effectively, we further propose Personal Attribution Mediation Optimization (PAMO), which counterfactually masks that history to estimate personal mediation support and reallocates rank-aware advantage mass under a platform-relative value floor. We theoretically prove that PAMO preserves cutoff-level advantage mass and is locally optimal among first-order reallocations that preserve this mass without lowering average platform-relative value. Experiments on MediateRec show that personal-agent mediation enables meaningful platform corrections, yet even strong proprietary LLMs introduce non-negligible harmful overrides. PAMO consistently improves over matched outcome-only RL across seen and unseen target platforms and on the real cross-platform test, while achieving a better rescue-harm balance.",
+      "primary_category": "cs.AI"
+    }
+  ]
+}
