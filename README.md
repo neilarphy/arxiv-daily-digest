@@ -58,7 +58,8 @@ flowchart LR
 
 ## Этапы
 
-- [ ] Дизайн-документ: проблема, требования, риски, экономика, метрики, данные
+- [x] Дизайн-документ: проблема, требования, риски, экономика, метрики
+- [x] EDA arXiv и этапы решения задачи (раздел 2.3 дизайн-документа)
 - [ ] MVP: сбор статей, ранжирование по эмбеддингам, дайджест в Telegram
 - [ ] Пересказы с проверкой соответствия тексту
 - [ ] Обучение ранжирования на реакциях, офлайн-оценка
@@ -76,7 +77,11 @@ Python 3.13, arXiv API, модель эмбеддингов для текста,
 ```
 docs/                     дизайн-документ
 src/                      код (появится на этапе MVP)
-notebooks/                эксперименты и офлайн-оценка
+scripts/                  сбор данных arXiv и разметка gold-набора
+notebooks/                EDA, эксперименты и офлайн-оценка
+reports/figures/          графики EDA, сохраняются при выполнении ноутбука
+data/processed/           производные таблицы EDA (сырые выгрузки в data/raw/ не коммитятся)
+data/gold/                gold-набор: выборка статей, разметка, профиль интересов
 pyproject.toml            метаданные проекта, зависимости, настройки ruff
 uv.lock                   зафиксированные версии зависимостей
 .pre-commit-config.yaml   хуки pre-commit
@@ -102,6 +107,19 @@ pre-commit run --all-files
 uv run ruff check . --fix
 uv run ruff format .
 ```
+
+### Данные и EDA
+
+```bash
+uv sync --group eda
+uv run python scripts/collect_arxiv.py meta --last 2026-10-28  # окно EDA: 6 недель, ~15 мин
+uv run python scripts/collect_arxiv.py monthly     # объемы по месяцам 2018–2026
+uv run python scripts/collect_arxiv.py fulltext    # выборка полных текстов, ~15 мин
+uv run python scripts/label_gold.py                # разметка gold-набора в терминале
+uv run jupyter nbconvert --to notebook --execute --inplace notebooks/01_eda_arxiv.ipynb
+```
+
+Скрипты соблюдают паузу 3 секунды между запросами к arXiv и кэшируют скачанное в `data/raw/`.
 
 
 ## Альтернативы
